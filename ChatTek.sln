@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31205.134
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChatTek", "ChatTek\ChatTek.csproj", "{A421DBDF-1D0C-4DDF-9076-83F40499C4CE}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A421DBDF-1D0C-4DDF-9076-83F40499C4CE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A421DBDF-1D0C-4DDF-9076-83F40499C4CE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A421DBDF-1D0C-4DDF-9076-83F40499C4CE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A421DBDF-1D0C-4DDF-9076-83F40499C4CE}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {04EEBDEA-92AA-4A49-929D-6C40AE77059E}
+	EndGlobalSection
+EndGlobal
