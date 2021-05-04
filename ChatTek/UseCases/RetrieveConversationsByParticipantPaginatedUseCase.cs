@@ -5,12 +5,12 @@ using System.Collections.Generic;
 
 namespace ChatTek.UseCases
 {
-    public class RetrieveConversationsByParticipantPaginated : IRetrieveConversationsByParticipantPaginated
+    public class RetrieveConversationsByParticipantPaginatedUseCase : IRetrieveConversationsByParticipantPaginatedUseCase
     {
         private readonly IConversationsRepository _conversationRepository;
         private readonly IIdentityService _identityService;
 
-        public RetrieveConversationsByParticipantPaginated(IConversationsRepository conversationsRepository,
+        public RetrieveConversationsByParticipantPaginatedUseCase(IConversationsRepository conversationsRepository,
             IIdentityService identityService)
         {
             _conversationRepository = conversationsRepository;
