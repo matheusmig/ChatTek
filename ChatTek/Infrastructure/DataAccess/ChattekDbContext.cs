@@ -5,7 +5,7 @@ using System.Collections.ObjectModel;
 
 namespace ChatTek.Infrastructure.DataAccess
 {
-    public class ChattekDbContext
+    public class ChattekDbContext : IChattekDbContext
     {
         public ChattekDbContext()
         {

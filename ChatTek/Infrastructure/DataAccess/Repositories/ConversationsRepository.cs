@@ -2,15 +2,14 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace ChatTek.Infrastructure.DataAccess.Repositories
 {
     public class ConversationsRepository : IConversationsRepository
     {
-        private readonly ChattekDbContext _dbContext;
+        private readonly IChattekDbContext _dbContext;
 
-        public ConversationsRepository(ChattekDbContext dbContext)
+        public ConversationsRepository(IChattekDbContext dbContext)
         {
             _dbContext = dbContext;
         }

@@ -1,7 +1,4 @@
-﻿using ChatTek.Infrastructure.DataAccess;
-using ChatTek.Infrastructure.DataAccess.Repositories;
-using ChatTek.Infrastructure.Identity;
-using ChatTek.UseCases;
+﻿using ChatTek.UseCases;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ChatTek.Controllers
@@ -15,17 +12,12 @@ namespace ChatTek.Controllers
         [HttpGet]
         public IActionResult GetByUser(
             [FromQuery] int? top, 
-            [FromQuery] int? skip)
+            [FromQuery] int? skip,
+            [FromServices] IRetrieveConversationsByParticipantPaginatedUseCase useCase)
         {
-            var dbContext = new ChattekDbContext();
-            var conversationRepository = new ConversationsRepository(dbContext);
-            var identityService = new IdentityService();
-
-            var useCase = new RetrieveConversationsByParticipantPaginated(conversationRepository, identityService);
-
             var result = useCase.Execute(top ?? 5, skip ?? 0);
 
             return Ok(result);
-        }        
+        }     
     }
 }

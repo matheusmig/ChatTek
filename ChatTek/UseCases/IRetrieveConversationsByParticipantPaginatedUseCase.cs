@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace ChatTek.UseCases
 {
-    public interface IRetrieveConversationsByParticipantPaginated
+    public interface IRetrieveConversationsByParticipantPaginatedUseCase
     {
         public IEnumerable<Conversation> Execute (
             int top,

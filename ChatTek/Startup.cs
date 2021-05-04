@@ -1,3 +1,7 @@
+using ChatTek.Infrastructure.DataAccess;
+using ChatTek.Infrastructure.DataAccess.Repositories;
+using ChatTek.Infrastructure.Identity;
+using ChatTek.UseCases;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -26,12 +30,17 @@ namespace ChatTek
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "ChatTek", Version = "v1" });
             });
+
+            // DI
+            services.AddScoped<IChattekDbContext, ChattekDbContext>();
+            services.AddScoped<IConversationsRepository, ConversationsRepository>();
+            services.AddTransient<IIdentityService, IdentityService>();
+            services.AddTransient<IRetrieveConversationsByParticipantPaginatedUseCase, RetrieveConversationsByParticipantPaginatedUseCase>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
