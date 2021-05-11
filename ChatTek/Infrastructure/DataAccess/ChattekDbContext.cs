@@ -1,55 +1,66 @@
 ﻿using ChatTek.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace ChatTek.Infrastructure.DataAccess
 {
-    public class ChattekDbContext : IChattekDbContext
+    public class ChattekDbContext : DbContext
     {
-        public ChattekDbContext()
+        public ChattekDbContext(DbContextOptions options) : base(options) {  }
+
+        public DbSet<Participant> Participants { get; set; }
+        public DbSet<Conversation> Conversations { get; set; }
+        public DbSet<MessageText> Messages { get; set; }
+
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            var participant1 = new Participant(
-                new Guid("378522FF-033B-4095-8CFD-AF292834FDD1"),
-                "Vanderlei",
-                "Luxemburgo"
-            );
+            if (modelBuilder is null)
+                throw new ArgumentNullException(nameof(modelBuilder));
 
-            var participant2 = new Participant(
-                new Guid("3B985986-2BC4-4276-ABD8-5EEA22F50236"),
-                "Guto",
-                "Ferreira"
-            );
+            modelBuilder.ApplyConfigurationsFromAssembly(typeof(ChattekDbContext).Assembly);
 
-            var participant3 = new Participant(
-                new Guid("6889519B-C366-4F49-822D-8237D3506A32"),
-                "Odair",
-                "Hellman"
-            );
-
-            Participants = new Collection<Participant>();
-            Participants.Add(participant1);
-            Participants.Add(participant2);
-            Participants.Add(participant3);
-
-
-            var conversation1 = new Conversation(
-                new Guid("9BF83AF2-769F-4350-8EC5-936474F1C2A4"),
-                new List<Participant>() { participant1, participant2, participant3 }
-                );
-
-            var conversation2 = new Conversation(
-                new Guid("0FFE2F28-649E-4960-83CF-8C1A0EFF9861"),
-                new List<Participant>() { participant2, participant3 }
-                );
-
-            Conversations = new Collection<Conversation>();
-            Conversations.Add(conversation1);
-            Conversations.Add(conversation2);
+            base.OnModelCreating(modelBuilder);
         }
 
-        public Collection<Participant> Participants { get; set; }
-        public Collection<Conversation> Conversations { get; set; }
-        public Collection<MessageText> Messages { get; set; }
+        protected override void OnConfiguring(DbContextOptionsBuilder builder)
+        {
+            if (!builder.IsConfigured)
+            {
+                string connectionString = ("Server=localhost;Database=chattek;user=root;password=admin;SslMode=none;charset=utf8");
+
+                builder.UseMySql(connectionString,
+                    ServerVersion.AutoDetect(connectionString),
+                    mySqlOptions =>
+                    {
+                        mySqlOptions.EnableRetryOnFailure(maxRetryCount: 3, maxRetryDelay: TimeSpan.FromSeconds(1), errorNumbersToAdd: null);
+                    });
+            }
+
+            base.OnConfiguring(builder);
+        }
+
+        public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = new CancellationToken())
+        {
+            /*foreach (Microsoft.EntityFrameworkCore.ChangeTracking.EntityEntry<AuditableEntity> entry in ChangeTracker.Entries<AuditableEntity>())
+            {
+                switch (entry.State)
+                {
+                    case EntityState.Added:
+                        entry.Entity.CreatedOnUtc = _dateTimeService.Now;
+                        break;
+
+                    case EntityState.Modified:
+                        entry.Entity.UpdatedOnUtc = _dateTimeService.Now;
+                        break;
+                }
+            }*/
+
+            var result = await base.SaveChangesAsync(cancellationToken);
+
+            return result;
+        }
     }
 }

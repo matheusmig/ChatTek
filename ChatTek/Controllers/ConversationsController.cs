@@ -1,4 +1,4 @@
-﻿using ChatTek.UseCases;
+﻿using ChatTek.UseCases.RetrieveConversationByParticipantPaginated;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ChatTek.Controllers
@@ -11,13 +11,13 @@ namespace ChatTek.Controllers
         // GET api/Conversations
         [HttpGet]
         public IActionResult GetByUser(
-            [FromQuery] int? top, 
+            [FromQuery] int? top,
             [FromQuery] int? skip,
             [FromServices] IRetrieveConversationsByParticipantPaginatedUseCase useCase)
         {
             var result = useCase.Execute(top ?? 5, skip ?? 0);
 
             return Ok(result);
-        }     
+        }
     }
 }

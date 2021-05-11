@@ -1,7 +1,7 @@
 ﻿using ChatTek.Models;
 using System.Collections.Generic;
 
-namespace ChatTek.UseCases
+namespace ChatTek.UseCases.RetrieveConversationByParticipantPaginated
 {
     public interface IRetrieveConversationsByParticipantPaginatedUseCase
     {

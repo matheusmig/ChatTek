@@ -3,7 +3,7 @@ using ChatTek.Infrastructure.Identity;
 using ChatTek.Models;
 using System.Collections.Generic;
 
-namespace ChatTek.UseCases
+namespace ChatTek.UseCases.RetrieveConversationByParticipantPaginated
 {
     public class RetrieveConversationsByParticipantPaginatedUseCase : IRetrieveConversationsByParticipantPaginatedUseCase
     {
