@@ -32,11 +32,15 @@ namespace ChatTek
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "ChatTek", Version = "v1" });
             });
 
-            // DI
+            // DI Persistence
             services.AddDbContext<ChattekDbContext>();
             services.AddScoped<IConversationsRepository, ConversationsRepository>();
             services.AddScoped<IParticipantRepository, ParticipantRepository>();
+
+            // DI Infra
             services.AddTransient<IIdentityService, IdentityService>();
+
+            // DI UseCases
             services.AddTransient<IRetrieveConversationsByParticipantPaginatedUseCase, RetrieveConversationsByParticipantPaginatedUseCase>();
             services.AddTransient<ICreateConversationUseCase, CreateConversationUseCase>();
             services.AddTransient<ICreateParticipantUseCase, CreateParticipantUseCase>();

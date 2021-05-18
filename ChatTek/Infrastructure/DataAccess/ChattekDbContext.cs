@@ -44,20 +44,6 @@ namespace ChatTek.Infrastructure.DataAccess
 
         public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = new CancellationToken())
         {
-            /*foreach (Microsoft.EntityFrameworkCore.ChangeTracking.EntityEntry<AuditableEntity> entry in ChangeTracker.Entries<AuditableEntity>())
-            {
-                switch (entry.State)
-                {
-                    case EntityState.Added:
-                        entry.Entity.CreatedOnUtc = _dateTimeService.Now;
-                        break;
-
-                    case EntityState.Modified:
-                        entry.Entity.UpdatedOnUtc = _dateTimeService.Now;
-                        break;
-                }
-            }*/
-
             var result = await base.SaveChangesAsync(cancellationToken);
 
             return result;
