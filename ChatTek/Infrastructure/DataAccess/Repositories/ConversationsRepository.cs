@@ -1,4 +1,5 @@
 ﻿using ChatTek.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,18 +21,15 @@ namespace ChatTek.Infrastructure.DataAccess.Repositories
             await _dbContext.Conversations.AddAsync(conversation);              
         }
 
-        public IEnumerable<Conversation> GetAllByUser(Guid UserId, int top, int skip)
+        public async Task<IEnumerable<Conversation>> GetAllByUserAsync(Guid UserId, int top, int skip)
         {
-            /* var result = _dbContext.Conversations
-                 .Where(x => x.Participants.Any(y => y.Id == UserId))
-                 .Skip(skip)
-                 .Take(top)
-                 .AsEnumerable();
+            var result = await _dbContext.Conversations
+                .Where(x => x.Participants.Any(y => y.Id == UserId))
+                .Skip(skip)
+                .Take(top)
+                .ToListAsync();
 
-             return result;*/
-
-            return null;
-
+             return result;
         }
     }
 }

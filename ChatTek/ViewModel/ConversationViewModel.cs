@@ -11,11 +11,11 @@ namespace ChatTek.ViewModel
         public ConversationViewModel(Conversation conversation)
         {
             Id = conversation.Id;
-            /*ParticipantsIdName = conversation.Participants.Select(x => (x.Id, $"{x.FirstName} {x.LastName}"));*/
+            Participants = conversation.Participants.Select(x => new ParticipantViewModel(x)).ToList();
         }
 
         public Guid Id { get; }
-        public IEnumerable<(Guid, string)> ParticipantsIdName { get; }
+        public IEnumerable<ParticipantViewModel> Participants { get; }
     }
 }
 

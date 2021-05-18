@@ -11,9 +11,9 @@ namespace ChatTek.Models
         public Conversation(Guid id, IEnumerable<Participant> participants)
         {
             Id = id;
-            //Participants = participants;
+            Participants = participants;
         }
 
-        //public IEnumerable<Participant> Participants { get; set; }
+        public IEnumerable<Participant> Participants { get; set; }
     }
 }

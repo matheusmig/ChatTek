@@ -1,6 +1,7 @@
 ﻿using ChatTek.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace ChatTek.Infrastructure.DataAccess.Repositories
@@ -29,6 +30,12 @@ namespace ChatTek.Infrastructure.DataAccess.Repositories
         {
             return await _dbContext.Participants.
                 FirstOrDefaultAsync(x => x.FirstName == firstName && x.LastName == LastName);
+        }
+
+        public async Task<IEnumerable<Participant>> GetAllAsync()
+        {
+            return await _dbContext.Participants.
+                ToListAsync();
         }
     }
 }

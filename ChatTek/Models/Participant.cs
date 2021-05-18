@@ -1,5 +1,6 @@
 ﻿using ChatTek.Models.Common;
 using System;
+using System.Collections.Generic;
 
 namespace ChatTek.Models
 {
@@ -14,5 +15,7 @@ namespace ChatTek.Models
 
         public string FirstName { get; set; }
         public string LastName { get; set; }
+
+        public IEnumerable<Conversation> Conversations { get; set; }
     }
 }

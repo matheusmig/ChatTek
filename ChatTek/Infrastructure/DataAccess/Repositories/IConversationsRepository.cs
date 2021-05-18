@@ -8,6 +8,6 @@ namespace ChatTek.Infrastructure.DataAccess.Repositories
     public interface IConversationsRepository
     {
         Task AddAsync(Conversation conversation);
-        IEnumerable<Conversation> GetAllByUser(Guid UserId, int top, int skip);
+        Task<IEnumerable<Conversation>> GetAllByUserAsync(Guid UserId, int top, int skip);
     }
 }

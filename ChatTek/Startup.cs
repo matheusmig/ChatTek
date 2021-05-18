@@ -3,6 +3,7 @@ using ChatTek.Infrastructure.DataAccess.Repositories;
 using ChatTek.Infrastructure.Identity;
 using ChatTek.UseCases.CreateConversation;
 using ChatTek.UseCases.CreateParticipant;
+using ChatTek.UseCases.GetAllParticipants;
 using ChatTek.UseCases.RetrieveConversationByParticipantPaginated;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -39,6 +40,7 @@ namespace ChatTek
             services.AddTransient<IRetrieveConversationsByParticipantPaginatedUseCase, RetrieveConversationsByParticipantPaginatedUseCase>();
             services.AddTransient<ICreateConversationUseCase, CreateConversationUseCase>();
             services.AddTransient<ICreateParticipantUseCase, CreateParticipantUseCase>();
+            services.AddTransient<IGetAllParticipantsUseCase, GetAllParticipantsUseCase>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

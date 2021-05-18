@@ -2,6 +2,7 @@
 using ChatTek.Infrastructure.Identity;
 using ChatTek.Models;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace ChatTek.UseCases.RetrieveConversationByParticipantPaginated
 {
@@ -17,11 +18,11 @@ namespace ChatTek.UseCases.RetrieveConversationByParticipantPaginated
             _identityService = identityService;
         }
 
-        public IEnumerable<Conversation> Execute(int top, int skip)
+        public async Task<IEnumerable<Conversation>> ExecuteAsync(int top, int skip)
         {
             var currentUserId = _identityService.GetCurrentUserId();
 
-            var result = _conversationRepository.GetAllByUser(currentUserId, top, skip);
+            var result = await _conversationRepository.GetAllByUserAsync(currentUserId, top, skip);
 
             return result;
         }

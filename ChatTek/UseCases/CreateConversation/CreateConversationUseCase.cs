@@ -1,5 +1,6 @@
 ﻿using ChatTek.Infrastructure.DataAccess;
 using ChatTek.Infrastructure.DataAccess.Repositories;
+using ChatTek.Infrastructure.Identity;
 using ChatTek.Models;
 using System;
 using System.Collections.Generic;
@@ -14,21 +15,33 @@ namespace ChatTek.UseCases.CreateConversation
 
         private readonly IConversationsRepository _conversationRepository;
         private readonly IParticipantRepository _participantRepository;
+        private readonly IIdentityService _identityService;
 
         public CreateConversationUseCase(
             ChattekDbContext dbContext,
             IConversationsRepository conversationsRepository,
-            IParticipantRepository participantRepository)
+            IParticipantRepository participantRepository,
+            IIdentityService identityService)
         {
             _dbContext = dbContext;
             _conversationRepository = conversationsRepository;
             _participantRepository = participantRepository;
+            _identityService = identityService;
         }
 
         public async Task<Conversation> ExecuteAsync(IEnumerable<Guid> participantIds)
         {
+            var currentUserId = _identityService.GetCurrentUserId();
+
+            //TODO: Decorate with validator
             if (participantIds?.Any() != true)
                 throw new ArgumentException("participantIds is null or empty");
+            
+            if (participantIds.Count() > 4)
+                throw new ArgumentException("Conversation cannot have more than 4 participants");
+
+            if (participantIds.FirstOrDefault(participantId => participantId.Equals(currentUserId)) != default)
+                throw new ArgumentException("User cannot add itself to conversation");
 
             var foundParticipants = new List<Participant>();
 

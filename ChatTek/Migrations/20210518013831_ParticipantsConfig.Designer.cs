@@ -3,14 +3,16 @@ using System;
 using ChatTek.Infrastructure.DataAccess;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace ChatTek.Migrations
 {
     [DbContext(typeof(ChattekDbContext))]
-    partial class ChattekDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210518013831_ParticipantsConfig")]
+    partial class ParticipantsConfig
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -57,6 +59,9 @@ namespace ChatTek.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("char(36)");
 
+                    b.Property<Guid?>("ConversationId")
+                        .HasColumnType("char(36)");
+
                     b.Property<string>("FirstName")
                         .HasMaxLength(64)
                         .HasColumnType("varchar(64)");
@@ -67,37 +72,21 @@ namespace ChatTek.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("ConversationId");
+
                     b.ToTable("Participants");
                 });
 
-            modelBuilder.Entity("ConversationParticipant", b =>
-                {
-                    b.Property<Guid>("ConversationsId")
-                        .HasColumnType("char(36)");
-
-                    b.Property<Guid>("ParticipantsId")
-                        .HasColumnType("char(36)");
-
-                    b.HasKey("ConversationsId", "ParticipantsId");
-
-                    b.HasIndex("ParticipantsId");
-
-                    b.ToTable("ConversationParticipant");
-                });
-
-            modelBuilder.Entity("ConversationParticipant", b =>
+            modelBuilder.Entity("ChatTek.Models.Participant", b =>
                 {
                     b.HasOne("ChatTek.Models.Conversation", null)
-                        .WithMany()
-                        .HasForeignKey("ConversationsId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .WithMany("Participants")
+                        .HasForeignKey("ConversationId");
+                });
 
-                    b.HasOne("ChatTek.Models.Participant", null)
-                        .WithMany()
-                        .HasForeignKey("ParticipantsId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+            modelBuilder.Entity("ChatTek.Models.Conversation", b =>
+                {
+                    b.Navigation("Participants");
                 });
 #pragma warning restore 612, 618
         }
