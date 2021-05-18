@@ -1,5 +1,5 @@
-﻿using ChatTek.UseCases.CreateConversation;
-using ChatTek.UseCases.RetrieveConversationByParticipantPaginated;
+﻿using Application.UseCases.CreateConversation;
+using Application.UseCases.RetrieveConversationByParticipantPaginated;
 using ChatTek.ViewModel;
 using Microsoft.AspNetCore.Mvc;
 using System.Linq;

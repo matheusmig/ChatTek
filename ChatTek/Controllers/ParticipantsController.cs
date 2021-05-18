@@ -1,5 +1,5 @@
-﻿using ChatTek.UseCases.CreateParticipant;
-using ChatTek.UseCases.GetAllParticipants;
+﻿using Application.UseCases.CreateParticipant;
+using Application.UseCases.GetAllParticipants;
 using ChatTek.ViewModel;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;

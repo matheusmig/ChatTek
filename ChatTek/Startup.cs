@@ -1,16 +1,18 @@
-using ChatTek.Infrastructure.DataAccess;
-using ChatTek.Infrastructure.DataAccess.Repositories;
-using ChatTek.Infrastructure.Identity;
-using ChatTek.UseCases.CreateConversation;
-using ChatTek.UseCases.CreateParticipant;
-using ChatTek.UseCases.GetAllParticipants;
-using ChatTek.UseCases.RetrieveConversationByParticipantPaginated;
+using Infrastructure.DataAccess;
+using Infrastructure.DataAccess.Repositories;
+using Infrastructure.Identity;
+using Application.UseCases.CreateConversation;
+using Application.UseCases.CreateParticipant;
+using Application.UseCases.GetAllParticipants;
+using Application.UseCases.RetrieveConversationByParticipantPaginated;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using Domain.Conversations;
+using Domain.Participants;
 
 namespace ChatTek
 {

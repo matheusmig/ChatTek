@@ -1,4 +1,4 @@
-﻿using ChatTek.Models;
+﻿using Domain.Participants;
 using System;
 
 namespace ChatTek.ViewModel

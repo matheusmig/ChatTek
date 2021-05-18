@@ -1,4 +1,4 @@
-﻿using ChatTek.Models;
+﻿using Domain.Conversations;
 using System;
 using System.Collections.Generic;
 using System.Linq;
