@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Domain.ValueObjects;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -8,7 +9,7 @@ namespace Domain.Participants
     {
         Task AddAsync(Participant model);
         Task<Participant> GetAsync(Guid id);
-        Task<Participant> FindByFullNameAsync(string firstName, string LastName);
+        Task<Participant> FindByFullNameAsync(FullName fullName);
         Task<IEnumerable<Participant>> GetAllAsync();
     }
 }

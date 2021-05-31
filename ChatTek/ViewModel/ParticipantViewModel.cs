@@ -5,12 +5,11 @@ namespace ChatTek.ViewModel
 {
     public class ParticipantViewModel
     {
-
         public ParticipantViewModel(Participant participant)
         {
             Id = participant.Id;
-            FirstName = participant.FirstName;
-            LastName = participant.LastName;
+            FirstName = participant.FullName.FirstName;
+            LastName = participant.FullName.LastName;
         }
 
         public Guid Id { get; }

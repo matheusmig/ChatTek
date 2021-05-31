@@ -31,5 +31,19 @@ namespace Infrastructure.DataAccess.Repositories
 
              return result;
         }
+
+        public async Task<Conversation> GetAsync(Guid conversationId)
+        {
+            return await _dbContext.Conversations
+               .FirstOrDefaultAsync(x => x.Id == conversationId);
+        }
+
+        public async Task<Conversation> GetAsync(Guid conversationId, string include)
+        {
+            return await _dbContext.Conversations
+                .Where(x => x.Id == conversationId)
+                .Include(include)
+                .SingleOrDefaultAsync();
+        }
     }
 }

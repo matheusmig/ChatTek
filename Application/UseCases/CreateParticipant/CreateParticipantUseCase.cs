@@ -1,34 +1,33 @@
-﻿using Infrastructure.DataAccess;
-using System;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Domain.Participants;
+using Domain.ValueObjects;
+using Application.Common;
 
 namespace Application.UseCases.CreateParticipant
 {
     public class CreateParticipantUseCase : ICreateParticipantUseCase
     {
-        private readonly ChattekDbContext _dbContext; //TODO: change to UoW
+        private readonly IUnitOfWork _unitOfWork;
         private readonly IParticipantRepository _participantRepository;
-        
+        private readonly IParticipantFactory _factory;
 
         public CreateParticipantUseCase(
-            ChattekDbContext dbContext,
-            IParticipantRepository participantRepository)
+            IUnitOfWork unitOfWork,
+            IParticipantRepository participantRepository,
+            IParticipantFactory factory)
         {
-            _dbContext = dbContext;
+            _unitOfWork = unitOfWork;
             _participantRepository = participantRepository;
+            _factory = factory;
         }
 
         public async Task<Participant> ExecuteAsync(string firstName, string lastName)
         {
-            var newParticipant = new Participant(
-                Guid.NewGuid(),
-                firstName,
-                lastName);
+            var newParticipant = _factory.NewParticipant(new FullName(firstName, lastName));
 
             await _participantRepository.AddAsync(newParticipant);
 
-            await _dbContext.SaveChangesAsync();
+            await _unitOfWork.SaveAsync();
 
             return newParticipant;
         }

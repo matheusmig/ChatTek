@@ -1,6 +1,7 @@
 ﻿using Domain.Conversations;
 using Domain.Messages;
 using Domain.Participants;
+using Domain.ValueObjects;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -13,20 +14,17 @@ namespace Infrastructure.DataAccess
         {
             var participant1 = new Participant(
                 new Guid("378522FF-033B-4095-8CFD-AF292834FDD1"),
-                "Vanderlei",
-                "Luxemburgo"
+                new FullName("Vanderlei",  "Luxemburgo")
             );
 
             var participant2 = new Participant(
                 new Guid("3B985986-2BC4-4276-ABD8-5EEA22F50236"),
-                "Guto",
-                "Ferreira"
+                new FullName("Guto", "Ferreira")
             );
 
             var participant3 = new Participant(
                 new Guid("6889519B-C366-4F49-822D-8237D3506A32"),
-                "Odair",
-                "Hellman"
+                new FullName("Odair", "Hellman")
             );
 
             Participants = new Collection<Participant>();

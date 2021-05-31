@@ -1,6 +1,6 @@
-﻿using Infrastructure.Identity;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+using Application.Common;
 using Domain.Conversations;
 
 namespace Application.UseCases.RetrieveConversationByParticipantPaginated

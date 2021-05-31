@@ -13,6 +13,8 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using Domain.Conversations;
 using Domain.Participants;
+using ChatTek.Modules;
+using Application.Common;
 
 namespace ChatTek
 {
@@ -38,15 +40,12 @@ namespace ChatTek
             services.AddDbContext<ChattekDbContext>();
             services.AddScoped<IConversationsRepository, ConversationsRepository>();
             services.AddScoped<IParticipantRepository, ParticipantRepository>();
+            services.AddTransient<IParticipantFactory, EntityFactory>();
 
-            // DI Infra
-            services.AddTransient<IIdentityService, IdentityService>();
+            services.AddTransient<IUnitOfWork, UnitOfWork>();
 
-            // DI UseCases
-            services.AddTransient<IRetrieveConversationsByParticipantPaginatedUseCase, RetrieveConversationsByParticipantPaginatedUseCase>();
-            services.AddTransient<ICreateConversationUseCase, CreateConversationUseCase>();
-            services.AddTransient<ICreateParticipantUseCase, CreateParticipantUseCase>();
-            services.AddTransient<IGetAllParticipantsUseCase, GetAllParticipantsUseCase>();
+            services.AddInfrastructure()
+                .AddUseCases();            
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

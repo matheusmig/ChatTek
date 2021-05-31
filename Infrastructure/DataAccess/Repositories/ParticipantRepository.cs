@@ -1,4 +1,5 @@
 ﻿using Domain.Participants;
+using Domain.ValueObjects;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -26,10 +27,10 @@ namespace Infrastructure.DataAccess.Repositories
             return await _dbContext.Participants.
                 FirstOrDefaultAsync(x => x.Id == id);
         }
-        public async Task<Participant> FindByFullNameAsync(string firstName, string LastName)
+        public async Task<Participant> FindByFullNameAsync(FullName fullName)
         {
             return await _dbContext.Participants.
-                FirstOrDefaultAsync(x => x.FirstName == firstName && x.LastName == LastName);
+                FirstOrDefaultAsync(x => x.FullName == fullName);
         }
 
         public async Task<IEnumerable<Participant>> GetAllAsync()

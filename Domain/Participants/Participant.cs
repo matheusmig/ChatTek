@@ -1,5 +1,6 @@
 ﻿using Domain.Common;
 using Domain.Conversations;
+using Domain.ValueObjects;
 using System;
 using System.Collections.Generic;
 
@@ -7,15 +8,13 @@ namespace Domain.Participants
 {
     public class Participant : Entity
     {
-        public Participant(Guid id, string firstName, string lastName)
+        public Participant(Guid id, FullName fullName)
         {
             Id = id;
-            FirstName = firstName;
-            LastName = lastName;
+            FullName = fullName;
         }
 
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
+        public FullName FullName { get; set; }
 
         public IEnumerable<Conversation> Conversations { get; set; }
     }

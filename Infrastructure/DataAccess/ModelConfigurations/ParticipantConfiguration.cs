@@ -12,11 +12,13 @@ namespace Infrastructure.DataAccess.ModelConfigurations
 
             builder.HasKey(b => b.Id);
 
-            builder.Property(p => p.FirstName)
-                .HasMaxLength(64);
-
-            builder.Property(p => p.LastName)
-                .HasMaxLength(64);
+            builder.OwnsOne(m => m.FullName, a =>
+            {
+                a.Property(p => p.FirstName).HasMaxLength(64)
+                    .HasColumnName("FullNameFirstName");
+                a.Property(p => p.LastName).HasMaxLength(64)
+                    .HasColumnName("FullNameLastName");
+            });
         }
     }
 }
