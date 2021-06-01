@@ -45,7 +45,8 @@ namespace ChatTek
             services.AddTransient<IUnitOfWork, UnitOfWork>();
 
             services.AddInfrastructure()
-                .AddUseCases();            
+                .AddUseCases()
+                .AddAuthenticationCustom();            
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

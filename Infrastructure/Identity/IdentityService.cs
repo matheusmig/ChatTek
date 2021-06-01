@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Application.Common;
+using System;
 
 namespace Infrastructure.Identity
 {
