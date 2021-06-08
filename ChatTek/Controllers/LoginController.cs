@@ -56,6 +56,7 @@ namespace ChatTek.Controllers
         public ActionResult TestPoliciesBased()
         {
             return Ok("You have role Manager and claim Department with Marketing value");
+
         }
     }
 }
