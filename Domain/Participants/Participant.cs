@@ -17,5 +17,7 @@ namespace Domain.Participants
         public FullName FullName { get; set; }
 
         public IEnumerable<Conversation> Conversations { get; set; }
+
+        public Guid? UserId { get; set; }
     }
 }

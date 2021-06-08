@@ -5,11 +5,16 @@ VisualStudioVersion = 16.0.31205.134
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ChatTek", "ChatTek\ChatTek.csproj", "{A421DBDF-1D0C-4DDF-9076-83F40499C4CE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain", "Domain\Domain.csproj", "{8CFF962A-C4AD-4076-A4A1-A03A205AB865}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Domain", "Domain\Domain.csproj", "{8CFF962A-C4AD-4076-A4A1-A03A205AB865}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Application", "Application\Application.csproj", "{6E82EAC4-B44E-4054-A80D-9E6C02CDE3FA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Application", "Application\Application.csproj", "{6E82EAC4-B44E-4054-A80D-9E6C02CDE3FA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infrastructure", "Infrastructure\Infrastructure.csproj", "{DAA67301-831C-4DEF-8317-643949CAE8A3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Infrastructure", "Infrastructure\Infrastructure.csproj", "{DAA67301-831C-4DEF-8317-643949CAE8A3}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{F7BEFC4D-0C8A-4F4C-8B43-9D5BF28D02C8}"
+	ProjectSection(SolutionItems) = preProject
+		..\..\..\..\Users\Poatek\Desktop\chatClient.html = ..\..\..\..\Users\Poatek\Desktop\chatClient.html
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

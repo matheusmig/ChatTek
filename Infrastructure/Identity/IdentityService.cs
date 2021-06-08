@@ -1,12 +1,28 @@
-﻿using System;
+﻿using Application.Common;
+using Microsoft.AspNetCore.Http;
+using System;
+using System.Security.Claims;
 
 namespace Infrastructure.Identity
 {
     public class IdentityService : IIdentityService
     {
+
+        private readonly IHttpContextAccessor _httpContextAccessor;
+
+        public IdentityService(IHttpContextAccessor httpContextAccessor)
+        {
+            _httpContextAccessor = httpContextAccessor;
+        }
+
         public Guid GetCurrentUserId()
         {
-            return new Guid("378522FF-033B-4095-8CFD-AF292834FDD1");
+            ClaimsPrincipal user = this._httpContextAccessor
+                 .HttpContext
+                 .User;
+
+             string id = user.FindFirst("nameid")?.Value!;
+             return new Guid(id);
         }
     }
 }

@@ -1,10 +1,5 @@
 using Infrastructure.DataAccess;
 using Infrastructure.DataAccess.Repositories;
-using Infrastructure.Identity;
-using Application.UseCases.CreateConversation;
-using Application.UseCases.CreateParticipant;
-using Application.UseCases.GetAllParticipants;
-using Application.UseCases.RetrieveConversationByParticipantPaginated;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -45,7 +40,12 @@ namespace ChatTek
             services.AddTransient<IUnitOfWork, UnitOfWork>();
 
             services.AddInfrastructure()
-                .AddUseCases();            
+                .AddUseCases()
+                .AddAuthenticationCustom()
+                .AddHttpContextAccessor()
+                .AddAuthorizationCustom()
+                .AddHubsSignalR()
+                .AddCustomCors();            
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -58,16 +58,17 @@ namespace ChatTek
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "ChatTek v1"));
             }
 
-            app.UseHttpsRedirection();
+            app.UseCustomCors()
+               .UseRouting();
 
-            app.UseRouting();
-
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
-            });
+            })
+               .ConfigureHubsSignalR();
         }
     }
 }
